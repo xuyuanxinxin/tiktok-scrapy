@@ -5,9 +5,32 @@ from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
 
+import time
+import requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+def download(url,filename):
+    r = requests.get(url)
+    with open(filename+".mp4",mode="wb") as f:
+        f.write(r.content)
+    print("download success")
+
+
+def main():
+    driver = webdriver.Chrome()
+    driver.get('https://www.douyin.com/video/7191967352978771260')
+    time.sleep(3)
+
+    video = driver.find_element(by=By.XPATH,value="//video/source")
+    video_url = video.get_attribute("src")
+    download(video_url,"7191967352978771260")
+    print(video)
+
 
 @app.route('/')
 def index():
+    main()
     """
     :return: 返回index页面
     """
