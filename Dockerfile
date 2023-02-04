@@ -15,6 +15,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositorie
 # 安装python3
 && apk add --update --no-cache python3 py3-pip \
 && rm -rf /var/cache/apk/*
+&& echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" > /etc/apk/repositories
+&& echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+&& apk update
+&& apk add chromium
+&& apk add chromium-chromedriver
 
 # 拷贝当前项目到/app目录下（.dockerignore中文件除外）
 COPY . /app
