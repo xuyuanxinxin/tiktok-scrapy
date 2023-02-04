@@ -11,15 +11,18 @@ RUN apk add ca-certificates
 
 # 安装依赖包，如需其他依赖包，请到alpine依赖包管理(https://pkgs.alpinelinux.org/packages?name=php8*imagick*&branch=v3.13)查找。
 # 选用国内镜像源以提高下载速度
+RUN echo "http://dl-4.alpinelinux.org/alpine/v3.4/main" >> /etc/apk/repositories && \
+	echo "http://dl-4.alpinelinux.org/alpine/v3.4/community" >> /etc/apk/repositories
+
+
+RUN apk update && \
+	apk add python py-pip curl unzip libexif udev chromium chromium-chromedriver xvfb && \
+	pip install selenium && \
+	pip install pyvirtualdisplay
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositories \
 # 安装python3
 && apk add --update --no-cache python3 py3-pip \
 && rm -rf /var/cache/apk/*
-&& echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" > /etc/apk/repositories
-&& echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
-&& apk update
-&& apk add chromium
-&& apk add chromium-chromedriver
 
 # 拷贝当前项目到/app目录下（.dockerignore中文件除外）
 COPY . /app
