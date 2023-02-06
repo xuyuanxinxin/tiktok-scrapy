@@ -3,8 +3,6 @@ FROM openstax/selenium-chrome
 COPY . /app
 WORKDIR /app
 
-RUN mkdir __logger
-
 # set display port to avoid crash
 ENV DISPLAY=:99
 
