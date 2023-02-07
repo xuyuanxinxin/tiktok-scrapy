@@ -10,10 +10,10 @@ COPY . /app
 WORKDIR /app
 
 
-RUN apt-get update && apt-get install wget vim python3 python3-pip
+RUN apt-get update && apt-get install -y wget vim python3 python3-pip
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN apt-get install ./google-chrome-stable_current_amd64.deb
+RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 RUN wget https://chromedriver.storage.googleapis.com/109.0.5414.74/chromedriver_linux64.zip
 RUN unzip ./chromedriver_linux64.zip
 RUN mv ./chromedriver /usr/bin 
