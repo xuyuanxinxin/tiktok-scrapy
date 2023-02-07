@@ -3,8 +3,6 @@ FROM debian
 COPY . /app
 WORKDIR /app
 
-RUN pip install --upgrade pip
-
 # 拷贝当前项目到/app目录下（.dockerignore中文件除外）
 COPY . /app
 
