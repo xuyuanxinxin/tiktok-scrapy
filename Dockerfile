@@ -1,10 +1,7 @@
-FROM openstax/selenium-chrome
+FROM debian
 
 COPY . /app
 WORKDIR /app
-
-# set display port to avoid crash
-ENV DISPLAY=:99
 
 RUN pip install --upgrade pip
 
@@ -14,6 +11,14 @@ COPY . /app
 # 设定当前的工作目录
 WORKDIR /app
 
+
+RUN apt update && apt install wget vim python3 python3-pip
+
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN apt-get install ./google-chrome-stable_current_amd64.deb
+RUN wget https://chromedriver.storage.googleapis.com/109.0.5414.74/chromedriver_linux64.zip
+RUN unzip ./chromedriver_linux64.zip
+RUN mv ./chromedriver /usr/bin 
 # 安装依赖到指定的/install文件夹
 # 选用国内镜像源以提高下载速度
 RUN pip config set global.index-url http://mirrors.cloud.tencent.com/pypi/simple \
