@@ -10,7 +10,7 @@ COPY . /app
 WORKDIR /app
 
 
-RUN apt-get update && apt-get install -y wget vim python3 python3-pip
+RUN apt-get update && apt-get install -y wget vim python3 python3-pip unzip
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
